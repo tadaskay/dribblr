@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../duck';
+import Shot from '../Shot/Shot';
+import './Feed.scss';
 
 const propTypes = {
   actions: PropTypes.shape({
@@ -20,7 +22,11 @@ class Feed extends Component {
 
   render() {
     return (
-      <p>{JSON.stringify(this.props.shots)}</p>
+      <div className="Feed">
+        {this.props.shots.map(shot =>
+          <Shot title={shot.trackName} author={shot.artistName} imageUrl={shot.artworkUrl100} />)
+        }
+      </div>
     );
   }
 }
