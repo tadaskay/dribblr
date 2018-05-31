@@ -1,0 +1,8 @@
+{
+  "name": "dribblr",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:tadaskay/dribblr.git",
+  "author": "Tadas Krivickas <tadas.krivickas@gmail.com>",
+  "license": "MIT"
+}
