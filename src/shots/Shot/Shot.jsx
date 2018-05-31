@@ -9,8 +9,23 @@ const propTypes = {
 };
 const defaultProps = {};
 
-// eslint-disable-next-line react/prefer-stateless-function
 class Shot extends Component {
+  state = {
+    overlay: false,
+  };
+
+  showOverlay = () => {
+    this.setState({
+      overlay: true,
+    });
+  };
+
+  hideOverlay = () => {
+    this.setState({
+      overlay: false,
+    });
+  };
+
   render() {
     const { title, author, imageUrl } = this.props;
     return (
@@ -18,9 +33,14 @@ class Shot extends Component {
         <div
           className="Shot-content"
           style={{ backgroundImage: `url(${imageUrl})` }}
+          onMouseEnter={this.showOverlay}
+          onMouseLeave={this.hideOverlay}
         >
           <span>{title}</span>
           <p>{author}</p>
+          {this.state.overlay && (
+            <p>Over!</p>
+          )}
         </div>
 
       </div>
