@@ -8,7 +8,7 @@ import './Feed.scss';
 
 const propTypes = {
   actions: PropTypes.shape({
-    queryShots: PropTypes.func.isRequired,
+    fetchMoreShots: PropTypes.func.isRequired,
   }).isRequired,
   // eslint-disable-next-line
   shots: PropTypes.any,
@@ -17,7 +17,7 @@ const defaultProps = {};
 
 class Feed extends Component {
   componentDidMount() {
-    this.props.actions.queryShots();
+    this.props.actions.fetchMoreShots();
   }
 
   render() {

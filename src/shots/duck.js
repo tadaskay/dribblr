@@ -1,6 +1,7 @@
 const QUERY_SHOTS = 'shots/QUERY';
 
 const defaultState = {
+  page: 0,
   loading: false,
   error: false,
   shots: [],
@@ -24,21 +25,27 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         shots: action.payload,
+        page: state.page + 1,
       };
     default:
       return state;
   }
 };
-export const queryShots = () => ({
-  type: QUERY_SHOTS,
-  payload: fetch('/api/projects?api_key=', {
-  }).then(res => res.json())
-    .then(res => res.projects.map(p => ({
-      title: p.name,
-      imageUrl: p.covers['230'],
-      author: p.owners.length ? p.owners[0].display_name : '',
-    }))),
-});
+export const fetchMoreShots = () => (dispatch, getState) => {
+  const nextPage = getState().shots.page + 1;
+  return dispatch({
+    type: QUERY_SHOTS,
+    payload: {
+      promise: fetch(`/api/projects?page=${nextPage}&api_key=`)
+        .then(res => res.json())
+        .then(res => res.projects.map(p => ({
+          title: p.name,
+          imageUrl: p.covers['230'],
+          author: p.owners.length ? p.owners[0].display_name : '',
+        }))),
+    },
+  });
+};
 
 export const selector = state => state.shots;
 
