@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint ./src --ext js --ext jsx",
-    "dev": "parcel ./src/index.html",
+    "dev": "node tools/devServer.js",
     "build": "rimraf ./dist && parcel build ./src/index.html"
   },
   "devDependencies": {
@@ -23,7 +23,9 @@
     "eslint-plugin-react": "^7.4.0",
     "node-sass": "^4.9.0",
     "parcel-bundler": "^1.8.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "express": "^4.16.3",
+    "http-proxy-middleware": "^0.18.0"
   },
   "dependencies": {
     "prop-types": "^15.6.1",

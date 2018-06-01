@@ -24,7 +24,12 @@ class Feed extends Component {
     return (
       <div className="Feed">
         {this.props.shots.map(shot =>
-          <Shot title={shot.trackName} author={shot.artistName} imageUrl={shot.artworkUrl100} />)
+          (<Shot
+            key={shot.title}
+            title={shot.title}
+            author={shot.author}
+            imageUrl={shot.imageUrl}
+          />))
         }
       </div>
     );

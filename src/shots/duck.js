@@ -29,12 +29,15 @@ const reducer = (state = defaultState, action) => {
       return state;
   }
 };
-
 export const queryShots = () => ({
   type: QUERY_SHOTS,
-  payload: fetch('https://itunes.apple.com/search?country=lt&term=photo')
-    .then(res => res.json())
-    .then(res => res.results),
+  payload: fetch('/api/projects?api_key=', {
+  }).then(res => res.json())
+    .then(res => res.projects.map(p => ({
+      title: p.name,
+      imageUrl: p.covers['230'],
+      author: p.owners.length ? p.owners[0].display_name : '',
+    }))),
 });
 
 export const selector = state => state.shots;
