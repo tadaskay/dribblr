@@ -24,14 +24,16 @@ const reducer = (state = defaultState, action) => {
     case `${QUERY_SHOTS}_FULFILLED`:
       return {
         ...state,
-        shots: action.payload,
+        shots: state.shots.concat(action.payload),
         page: state.page + 1,
+        loading: false,
+        error: false,
       };
     default:
       return state;
   }
 };
-export const fetchMoreShots = () => (dispatch, getState) => {
+const fetchMoreShots = () => (dispatch, getState) => {
   const nextPage = getState().shots.page + 1;
   return dispatch({
     type: QUERY_SHOTS,
@@ -39,6 +41,7 @@ export const fetchMoreShots = () => (dispatch, getState) => {
       promise: fetch(`/api/projects?page=${nextPage}&api_key=`)
         .then(res => res.json())
         .then(res => res.projects.map(p => ({
+          id: p.id,
           title: p.name,
           imageUrl: p.covers['230'],
           author: p.owners.length ? p.owners[0].display_name : '',
@@ -47,6 +50,7 @@ export const fetchMoreShots = () => (dispatch, getState) => {
   });
 };
 
+export const actions = ({ fetchMoreShots });
 export const selector = state => state.shots;
 
 export default reducer;
