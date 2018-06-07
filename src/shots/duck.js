@@ -46,7 +46,7 @@ const fetchMoreShots = () => (dispatch, getState) => {
   return dispatch({
     type: QUERY_SHOTS,
     payload: {
-      promise: fetch(`/api/projects?page=${nextPage}&api_key=`)
+      promise: fetch(`/api/projects?page=${nextPage}`)
         .then(handleErrors)
         .then(res => res.json())
         .then(res => (res.projects || []).map(p => ({

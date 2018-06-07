@@ -2,6 +2,7 @@
 const proxy = require('http-proxy-middleware');
 const Bundler = require('parcel-bundler');
 const express = require('express');
+const qs = require('query-string');
 
 const bundler = new Bundler('src/index.html', {
   cache: false,
@@ -9,12 +10,25 @@ const bundler = new Bundler('src/index.html', {
 
 const app = express();
 
+const apiKey = '';
+
+const pathOnly = pathWithQuery => pathWithQuery.split('?')[0];
+
+const pathRewrite = (path, req) => {
+  const newQuery = qs.stringify({
+    ...req.query,
+    api_key: apiKey,
+  });
+  const newPath = pathOnly(path).replace('/api', '/v2');
+  return `${newPath}?${newQuery}`;
+};
+
 app.use(
   '/api',
   proxy({
     target: 'https://www.behance.net',
     changeOrigin: true,
-    pathRewrite: { '^/api': '/v2' },
+    pathRewrite,
   }),
 );
 
