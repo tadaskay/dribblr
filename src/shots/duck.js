@@ -33,14 +33,23 @@ const reducer = (state = defaultState, action) => {
       return state;
   }
 };
+
+const handleErrors = (res) => {
+  if (!res.ok) {
+    throw Error(res.statusText);
+  }
+  return res;
+};
+
 const fetchMoreShots = () => (dispatch, getState) => {
   const nextPage = getState().shots.page + 1;
   return dispatch({
     type: QUERY_SHOTS,
     payload: {
       promise: fetch(`/api/projects?page=${nextPage}&api_key=`)
+        .then(handleErrors)
         .then(res => res.json())
-        .then(res => res.projects.map(p => ({
+        .then(res => (res.projects || []).map(p => ({
           id: p.id,
           title: p.name,
           imageUrl: p.covers['230'],

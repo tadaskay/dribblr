@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actions, selector } from '../duck';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const propTypes = {
   actions: PropTypes.shape({
     fetchMoreShots: PropTypes.func.isRequired,
   }).isRequired,
   loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
 };
 
 class Loader extends Component {
@@ -44,6 +46,9 @@ class Loader extends Component {
         {this.props.loading && (
           <p>Loading!</p>
         )}
+        {this.props.error && (
+          <ErrorMessage />
+        )}
       </div>
     );
   }
@@ -51,7 +56,10 @@ class Loader extends Component {
 
 Loader.propTypes = propTypes;
 
-const mapStateToProps = state => ({ loading: selector(state).loading });
+const mapStateToProps = (state) => {
+  const { loading, error } = selector(state);
+  return ({ loading, error });
+};
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(actions, dispatch) });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Loader);

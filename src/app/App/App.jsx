@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import './App.scss';
 import Feed from '../../shots/Feed/Feed';
+import './App.scss';
 
 const App = () => (
   <Fragment>
