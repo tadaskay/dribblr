@@ -10,6 +10,7 @@ Infinite scroll web app with images from Behance API. User can favorite/un-favor
 
   `API_KEY` refers to Behance API key which can be acquired by registering an app
 via https://www.behance.net/dev)
+- `$ open http://localhost:1234`
 
 ## Acknowledgements
 
