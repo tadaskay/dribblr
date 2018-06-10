@@ -19,3 +19,7 @@ list public media (functionality is only provided for selected customers). Switc
 alternative from the content point of view. Note that Behance API has 150 hourly request limit.
 - Even though requirements state Vanilla JS-only, 'bonus points' contradicts as it gives bonus points for Redux usage. 
 Made an assumption that Redux-related libraries are OK. Everything else is Vanilla JS, except for dev dependencies.
+- Tested on:
+  - OSX Chrome 66
+  - OSX Safari 11.1
+  - iOS Safari 11.4
