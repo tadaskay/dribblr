@@ -5,6 +5,9 @@
   "repository": "git@github.com:tadaskay/dribblr.git",
   "author": "Tadas Krivickas <tadas.krivickas@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "scripts": {
     "lint": "eslint ./src --ext js --ext jsx",
     "dev": "node tools/devServer.js",
