@@ -1,10 +1,12 @@
 const QUERY_SHOTS = 'shots/QUERY';
+const TOGGLE_FAVORITE = 'shots/TOGGLE_FAVORITE';
 
 const defaultState = {
   page: 0,
   loading: false,
   error: false,
   shots: [],
+  favorites: new Set(),
 };
 
 const reducer = (state = defaultState, action) => {
@@ -29,6 +31,19 @@ const reducer = (state = defaultState, action) => {
         loading: false,
         error: false,
       };
+    case TOGGLE_FAVORITE:
+      const shotId = action.payload;
+      const isFavorite = state.favorites.has(shotId);
+
+      let nextFavorites;
+      if (isFavorite) {
+        nextFavorites = new Set([...state.favorites]);
+        nextFavorites.delete(shotId);
+      } else {
+        nextFavorites = new Set([...state.favorites].concat(action.payload));
+      }
+
+      return { ...state, favorites: nextFavorites };
     default:
       return state;
   }
@@ -59,7 +74,12 @@ const fetchMoreShots = () => (dispatch, getState) => {
   });
 };
 
-export const actions = ({ fetchMoreShots });
+const toggleFavorite = id => ({
+  type: TOGGLE_FAVORITE,
+  payload: id,
+});
+
+export const actions = ({ fetchMoreShots, toggleFavorite });
 export const selector = state => state.shots;
 
 export default reducer;

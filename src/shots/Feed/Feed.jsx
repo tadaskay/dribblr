@@ -20,6 +20,7 @@ const Feed = ({ shots }) => (
     <div className="Feed">
       {shots.map(shot =>
         (<Shot
+          id={shot.id}
           key={shot.id}
           title={shot.title}
           author={shot.author}

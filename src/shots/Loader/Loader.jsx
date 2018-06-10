@@ -60,6 +60,9 @@ const mapStateToProps = (state) => {
   const { loading, error } = selector(state);
   return ({ loading, error });
 };
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(actions, dispatch) });
+const mapDispatchToProps = dispatch => {
+  const { fetchMoreShots } = actions;
+  return { actions: bindActionCreators({ fetchMoreShots }, dispatch) };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Loader);
