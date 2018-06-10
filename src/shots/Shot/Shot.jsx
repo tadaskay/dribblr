@@ -12,10 +12,10 @@ const propTypes = {
 const Shot = ({ title, author, imageUrl }) => {
   const overlay = (
     <Fragment>
-      <div>{title}</div>
+      <div className="Shot-overlay-title">{title}</div>
       <hr />
-      <div>{author}</div>
-      <button>Favourite</button>
+      <div className="Shot-overlay-author">{author}</div>
+      <button className="Shot-overlay-favorite">Favourite</button>
     </Fragment>
   );
 
@@ -23,6 +23,7 @@ const Shot = ({ title, author, imageUrl }) => {
     <div className="Shot-container">
       <Overlaid
         contentClassName="Shot-content"
+        overlayClassName="Shot-overlay"
         content={<img src={imageUrl} alt={title} />}
         overlay={overlay}
       />

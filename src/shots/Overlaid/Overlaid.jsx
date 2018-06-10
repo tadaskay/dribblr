@@ -6,17 +6,19 @@ const propTypes = {
   content: PropTypes.node,
   overlay: PropTypes.node,
   contentClassName: PropTypes.string,
+  overlayClassName: PropTypes.string,
 };
 const defaultProps = {
   content: undefined,
   overlay: undefined,
   contentClassName: '',
+  overlayClassName: '',
 };
 
-const Overlaid = ({ content, overlay, contentClassName }) => (
+const Overlaid = ({ content, overlay, contentClassName, overlayClassName }) => (
   <div className={`Overlaid-content ${contentClassName}`}>
     {content}
-    <div className="Overlaid-overlay">{overlay}</div>
+    <div className={`Overlaid-overlay ${overlayClassName}`}>{overlay}</div>
   </div>
 );
 
