@@ -10,7 +10,10 @@ const bundler = new Bundler('src/index.html', {
 
 const app = express();
 
-const apiKey = '';
+const apiKey = process.env.API_KEY;
+if (!apiKey) {
+  throw new Error('May I have an API_KEY to access Behance API?')
+}
 
 const pathOnly = pathWithQuery => pathWithQuery.split('?')[0];
 
