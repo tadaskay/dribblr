@@ -1,0 +1,26 @@
+/* Props:
+https://css-tricks.com/examples/ShapesOfCSS/#heart
+http://nicolasgallagher.com/
+*/
+.heart {
+  width: 60px;
+  height: 50px;
+}
+.heart:before,
+.heart:after {
+  position: absolute;
+  content: "";
+  left: 29px;
+  top: 0;
+  width: 30px;
+  height: 50px;
+  background: red;
+  border-radius: 50px 50px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+.heart:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}

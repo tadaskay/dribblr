@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Overlaid from '../../common/Overlaid/Overlaid';
 import GhostButton from '../../common/GhostButton/GhostButton';
-import { actions } from '../duck';
+import { actions, selector } from '../duck';
+import Heart from '../../common/Heart/Heart';
 import './Shot.scss';
 
 const propTypes = {
@@ -15,10 +16,11 @@ const propTypes = {
   actions: PropTypes.shape({
     toggleFavorite: PropTypes.func.isRequired,
   }).isRequired,
+  isFavorite: PropTypes.bool.isRequired,
 };
 
 const Shot = ({
-  id, title, author, imageUrl, actions: { toggleFavorite },
+  id, title, author, imageUrl, actions: { toggleFavorite }, isFavorite,
 }) => {
   const overlay = (
     <Fragment>
@@ -29,12 +31,19 @@ const Shot = ({
     </Fragment>
   );
 
+  const content = (
+    <div>
+      <img src={imageUrl} alt={title} />
+      {isFavorite && <Heart className="Shot-content-heart" />}
+    </div>
+  );
+
   return (
     <div className="Shot-container">
       <Overlaid
         contentClassName="Shot-content"
         overlayClassName="Shot-overlay"
-        content={<img src={imageUrl} alt={title} />}
+        content={content}
         overlay={overlay}
       />
     </div>
@@ -43,9 +52,11 @@ const Shot = ({
 
 Shot.propTypes = propTypes;
 
+const mapStateToProps = (state, props) => ({ isFavorite: selector(state).favorites.has(props.id) });
+
 const mapDispatchToProps = (dispatch) => {
   const { toggleFavorite } = actions;
   return { actions: bindActionCreators({ toggleFavorite }, dispatch) };
 };
 
-export default connect(null, mapDispatchToProps)(Shot);
+export default connect(mapStateToProps, mapDispatchToProps)(Shot);
