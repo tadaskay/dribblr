@@ -2,16 +2,12 @@
   padding: 10px;
   background: transparent;
   border-radius: 25px;
-  border-color: white;
-
   font-size: 1rem;
   color: white;
 
   outline: none;
+  border: 1px solid white;
 
-  &:active {
-    border-style: solid;
-  }
   &:hover {
     background: rgba(255,255,255,.5);
   }
