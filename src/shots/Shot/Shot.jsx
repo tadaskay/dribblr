@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './Shot.scss';
-import Overlaid from '../Overlaid/Overlaid';
+import Overlaid from '../../common/Overlaid/Overlaid';
 
 const propTypes = {
   title: PropTypes.string.isRequired,
