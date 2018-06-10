@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import './Shot.scss';
 import Overlaid from '../../common/Overlaid/Overlaid';
+import GhostButton from '../../common/GhostButton/GhostButton';
+import './Shot.scss';
 
 const propTypes = {
   title: PropTypes.string.isRequired,
@@ -15,7 +16,7 @@ const Shot = ({ title, author, imageUrl }) => {
       <div className="Shot-overlay-title">{title}</div>
       <hr />
       <div className="Shot-overlay-author">{author}</div>
-      <button className="Shot-overlay-favorite">Favourite</button>
+      <GhostButton className="Shot-overlay-favorite">Favourite</GhostButton>
     </Fragment>
   );
 
