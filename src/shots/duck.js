@@ -31,7 +31,7 @@ const reducer = (state = defaultState, action) => {
         loading: false,
         error: false,
       };
-    case TOGGLE_FAVORITE:
+    case TOGGLE_FAVORITE: {
       const shotId = action.payload;
       const isFavorite = state.favorites.has(shotId);
 
@@ -44,6 +44,7 @@ const reducer = (state = defaultState, action) => {
       }
 
       return { ...state, favorites: nextFavorites };
+    }
     default:
       return state;
   }

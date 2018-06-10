@@ -15,7 +15,9 @@ const defaultProps = {
   overlayClassName: '',
 };
 
-const Overlaid = ({ content, overlay, contentClassName, overlayClassName }) => (
+const Overlaid = ({
+  content, overlay, contentClassName, overlayClassName,
+}) => (
   <div className={`Overlaid-content ${contentClassName}`}>
     {content}
     <div className={`Overlaid-overlay ${overlayClassName}`}>{overlay}</div>
